@@ -4,6 +4,7 @@ import asyncio
 import json
 import logging
 import math
+import os
 import re
 from pathlib import Path
 from typing import Any
@@ -24,9 +25,14 @@ from aiogram.types import (
     Message,
     ReplyKeyboardMarkup,
 )
+from dotenv import load_dotenv
 
-# Токен Telegram-бота (BotFather)
-BOT_TOKEN = "9084571379:AAESAxskZgA0THN_3eDTzdYJw9KlOb4ybP0"
+# Загружаем переменные окружения из локального файла .env (рядом с bot.py)
+ENV_FILE = Path(__file__).resolve().parent / ".env"
+load_dotenv(dotenv_path=ENV_FILE)
+
+# Токен Telegram-бота считывается из переменной окружения (не хранится в коде)
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # Адрес открытого API ЦБ РФ с ежедневными курсами валют
 CBR_API_URL = "https://www.cbr-xml-daily.ru/daily_json.js"
@@ -710,9 +716,15 @@ async def handle_unsupported_message(message: Message) -> None:
 
 
 async def main() -> None:
-    """Точка входа: инициализация бота и запуск polling."""
+    """Точка входа: проверка токена, инициализация бота и запуск polling."""
+    if not BOT_TOKEN or not BOT_TOKEN.strip():
+        logger.error(
+            "Переменная BOT_TOKEN не задана! Укажите токен в файле .env."
+        )
+        return
+
     bot = Bot(
-        token=BOT_TOKEN,
+        token=BOT_TOKEN.strip(),
         default=DefaultBotProperties(parse_mode=ParseMode.HTML),
     )
     dp = Dispatcher()
