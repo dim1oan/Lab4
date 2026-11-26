@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv/
+venv/
+bot_educational.py
+user_settings.json
+Отчет Лаб 3*.docx
+.vscode/
+.idea/
+.DS_Store
