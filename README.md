@@ -35,8 +35,16 @@
 
 ## Запуск
 
-```bash
-pip install -r requirements.txt
-python bot.py
-python analysis.py
-```
+1. Установите зависимости:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Добавьте токен бота в локальный файл `.env` (файл исключен из Git через `.gitignore`):
+   ```env
+   BOT_TOKEN=ваш_токен_от_BotFather
+   ```
+3. Запустите бота или скрипт анализа данных:
+   ```bash
+   python bot.py
+   python analysis.py
+   ```

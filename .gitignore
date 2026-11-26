@@ -5,8 +5,10 @@ __pycache__/
 .venv/
 venv/
 bot_educational.py
+analysis_educational.py
 user_settings.json
 Отчет Лаб 3*.docx
+~$*.docx
 .vscode/
 .idea/
 .DS_Store
